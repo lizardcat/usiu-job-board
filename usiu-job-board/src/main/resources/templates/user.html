@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard | USIU Job Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Navbar Styling */
+        .navbar {
+            background-color: #003366;
+            border-bottom: 3px solid #fdb913;
+            padding: 0.8rem 1rem;
+        }
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .navbar-brand:hover {
+            color: #fdb913;
+            text-decoration: none;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: #fdb913 !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #f4f4f4;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #003366;
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #555555;
+        }
+        .hero .btn {
+            background-color: #fdb913;
+            color: #003366;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+        }
+        .hero .btn:hover {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 50px 20px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h5 {
+            color: #003366;
+            font-weight: bold;
+        }
+        .icon-gold {
+            color: #fdb913 !important; /* Ensure icon remains gold */
+            transition: none !important; /* Remove color transition */
+        }
+
+        /* Jobs Section */
+        .jobs-section {
+            padding: 50px 20px;
+        }
+        .jobs-section h2 {
+            color: #003366;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">USIU Job Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/jobs">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/client">Client Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Welcome, Job Seeker!</h1>
+    <p>Explore and apply for job opportunities tailored just for you.</p>
+    <a href="/jobs" class="btn btn-lg">Find Jobs</a>
+</div>
+
+<!-- Cards Section -->
+<div class="cards-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fa-solid fa-upload icon-gold"></i>
+                    <h5>Upload Resume</h5>
+                    <p>Upload your resume to increase your visibility among employers.</p>
+                    <a href="/user/upload" class="btn btn-primary" style="background-color: #fdb913; color: #003366;">Upload Resume</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fa-solid fa-briefcase icon-gold"></i>
+                    <h5>Applied Jobs</h5>
+                    <p>Track the jobs you have applied for and manage your applications.</p>
+                    <a href="/user/applied-jobs" class="btn btn-primary" style="background-color: #fdb913; color: #003366;">View Applied Jobs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jobs Section -->
+<div class="jobs-section">
+    <h2>Available Jobs</h2>
+    <div class="container">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Salary</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Pulling data from jobs table -->
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.title}"></td>
+                <td th:text="${job.company}"></td>
+                <td th:text="${job.location}"></td>
+                <td th:text="${job.type}"></td>
+                <td th:text="${job.salary}"></td>
+                <td>
+                    <a th:href="@{/user/apply(jobId=${job.id})}" class="btn btn-primary btn-sm" style="background-color: #fdb913; color: #003366;">Apply</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 USIU Job Portal. All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>

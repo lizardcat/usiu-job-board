@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register | USIU Job Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Navbar Styling */
+        .navbar {
+            background-color: #003366;
+            border-bottom: 3px solid #fdb913;
+            padding: 0.8rem 1rem;
+        }
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .navbar-brand:hover {
+            color: #fdb913;
+            text-decoration: none;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        .nav-link:hover {
+            color: #fdb913 !important;
+        }
+
+        /* Form Styling */
+        .register-form {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+        .register-form h2 {
+            color: #003366;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-label {
+            color: #003366;
+            font-weight: 600;
+        }
+        .form-control {
+            color: #000000; /* Black text for input fields */
+        }
+        .btn-primary {
+            background-color: #fdb913;
+            color: #003366;
+            font-weight: bold;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        /* Tab Styling */
+        .nav-tabs .nav-link {
+            color: #003366; /* Dark blue for inactive tabs */
+            background-color: #f4f4f4; /* Light grey for inactive tabs */
+            border: 1px solid #003366;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .nav-tabs .nav-link.active {
+            color: #ffffff; /* White text for active tab */
+            background-color: #003366; /* Dark blue for active tab */
+            border: 1px solid #003366;
+            border-bottom-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">USIU Job Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/jobs">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Register Form -->
+<div class="container mt-5">
+    <div class="register-form">
+        <h2>Register</h2>
+        <ul class="nav nav-tabs" id="registerTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user-register" type="button" role="tab">Job Seeker</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="client-tab" data-bs-toggle="tab" data-bs-target="#client-register" type="button" role="tab">Employer</button>
+            </li>
+        </ul>
+        <div class="tab-content mt-3" id="registerTabContent">
+            <!-- Job Seeker Register -->
+            <div class="tab-pane fade show active" id="user-register" role="tabpanel">
+                <form action="#" method="post" onsubmit="redirectToUser(event)">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="admin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="admin" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register as Job Seeker</button>
+                </form>
+            </div>
+            <!-- Employer Register -->
+            <div class="tab-pane fade" id="client-register" role="tabpanel">
+                <form action="#" method="post" onsubmit="redirectToClient(event)">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="admin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="admin" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register as Employer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function redirectToUser(event) {
+        event.preventDefault(); // Prevent form submission
+        window.location.href = "/user";
+    }
+
+    function redirectToClient(event) {
+        event.preventDefault(); // Prevent form submission
+        window.location.href = "/client";
+    }
+</script>
+</body>
+</html>
